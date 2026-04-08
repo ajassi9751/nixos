@@ -116,6 +116,18 @@
 		user.email = "ajassi9751@gmail.com";
 		init.defaultBranch = "main";
 		safe.directory = "/etc/nixos";
+		url = {
+			"https://github.com/" = {
+				insteadOf = [ "github:" "gh:" ];
+			};
+			"git@github.com:" = {
+				insteadOf = [ "ggithub:" "ggh:" ];
+			};
+		};
+		alias = {
+			cm = "commit -am";
+		};
+
 	};
   };
 
