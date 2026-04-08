@@ -111,11 +111,16 @@
 
   programs.git = {
   	enable = true;
+	package = pkgs.gitFull;
 	config = {
 		user.name = "Aikam Jassi";
 		user.email = "ajassi9751@gmail.com";
 		init.defaultBranch = "main";
 		safe.directory = "/etc/nixos";
+		credential.helper = "libsecret";
+		# credential.helper = "${pkgs.libsecret}/bin/secret-tool";
+		# credential.helper = "${pkgs.gitFull}/libexec/git-core/git-credential-libsecret";
+		# credential.helper = "cache";
 		url = {
 			"https://github.com/" = {
 				insteadOf = [ "github:" "gh:" ];
