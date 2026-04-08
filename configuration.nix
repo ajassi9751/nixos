@@ -90,6 +90,7 @@
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.aikam = {
+    # shell = "${pkgs.zsh}/bin/zsh";
     isNormalUser = true;
     description = "Aikam";
     extraGroups = [ "networkmanager" "wheel" ];
