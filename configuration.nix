@@ -142,7 +142,12 @@
 	};
   };
 
-  programs.steam.enable = true;
+  programs.steam = {
+  	enable = true;
+	gamescopeSession.enable = true;
+  };
+
+  programs.gamemode.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -196,7 +201,16 @@
     pavucontrol
     qemu
     gdb
+    mangohud
+    protonup
+    # lutris # Will use if needed
+    # heroic # Also will use if needed
+    # bottles # Same as the other two
   ];
+
+  environment.sessionVariables = {
+  	STEAM_EXTRA_COMPAT_TOOLS_PATHS = "~/home/.steam/root/compatabilitytools.d"; # Used for protonup
+  };
 
   fonts.packages = with pkgs; [
     jetbrains-mono
