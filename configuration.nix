@@ -188,6 +188,7 @@
     ffmpeg
     pavucontrol
     qemu
+    gdb
   ];
 
   fonts.packages = with pkgs; [
