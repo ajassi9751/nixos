@@ -18,6 +18,12 @@
   # Latest kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  #  specialisation = {
+  #    lts-kernel.configuration = {
+  # boot.kernelPackages = pkgs.linuxPackages;	
+  #    };
+  #  };
+
   networking.hostName = "aikamnix"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
