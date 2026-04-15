@@ -203,6 +203,7 @@
     gdb
     mangohud
     protonup-ng
+    ckan
     # lutris # Will use if needed
     # heroic # Also will use if needed
     # bottles # Same as the other two
