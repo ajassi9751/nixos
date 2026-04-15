@@ -142,6 +142,8 @@
 	};
   };
 
+  programs.steam.enable = true;
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -172,7 +174,6 @@
     ripgrep
     fzf
     fish
-    steam
     stylua
     clang-tools
     rust-analyzer
