@@ -202,7 +202,7 @@
     qemu
     gdb
     mangohud
-    protonup
+    protonup-ng
     # lutris # Will use if needed
     # heroic # Also will use if needed
     # bottles # Same as the other two
