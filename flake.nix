@@ -7,13 +7,16 @@
     # Old version of nixpgks for neofetch
     nixpkgs-old.url = "github:nixos/nixpkgs/nixos-24.05";
     hyprland.url = "github:hyprwm/Hyprland";
+    # Frc-nix input for frc stuff
+    frc-nix.url = "github:frc4451/frc-nix";
   };
 
-  outputs = { self, nixpkgs-unstable, nixpkgs-stable, nixpkgs-old, hyprland } @ inputs:
+  outputs = { self, nixpkgs-unstable, nixpkgs-stable, nixpkgs-old, hyprland, frc-nix } @ inputs:
   let
-    pkgs-unstable = import nixpkgs-unstable { system = "x86_64-linux"; };
-    pkgs-stable = import nixpkgs-stable { system = "x86_64-linux"; };
-    pkgs-old = import nixpkgs-old { system = "x86_64-linux"; };
+    system = "x86_64-linux";
+    pkgs-unstable = import nixpkgs-unstable { inherit system; };
+    pkgs-stable = import nixpkgs-stable { inherit system; };
+    pkgs-old = import nixpkgs-old { inherit system; };
     # etcherPkg = pkgs-unstable.callPackage ./etcher.nix { };
   in
   {
@@ -22,12 +25,24 @@
 		modules = [
 			./configuration.nix
 			{
+				# Nix packages from other versions
   				environment.systemPackages = with pkgs-unstable; [
 					ghostty
 					yazi
 					foot
 					pkgs-old.neofetch
 					# etcherPkg
+				];
+			}
+			{
+				# Frc nix stuff
+				environment.systemPackages = with frc-nix.packages.${system}; [
+					vscode-wpilib
+					advantagescope
+					choreo
+					pathplanner
+					elastic-dashboard
+					# sysid
 				];
 			}
 		];
