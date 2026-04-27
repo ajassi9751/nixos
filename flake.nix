@@ -19,7 +19,8 @@
     pkgs-old = import nixpkgs-old { inherit system; };
   in
   {
-	nixosConfigurations.system = nixpkgs-unstable.lib.nixosSystem {
+	# Make sure that configuration.nix gets the stable packages
+	nixosConfigurations.system = nixpkgs-stable.lib.nixosSystem {
 		specialArgs = { inherit inputs; };
 		modules = [
 			./configuration.nix
