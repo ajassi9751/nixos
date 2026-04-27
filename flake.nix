@@ -45,6 +45,12 @@
 					# sysid
 				];
 			}
+			{
+				# Custom stuff
+				environment.systemPackages = [
+					(pkgs-unstable.callPackage ./update-utils.nix {})
+				];
+			}
 		];
 	};
   };
