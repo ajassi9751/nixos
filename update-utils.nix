@@ -2,7 +2,7 @@
 writeShellScriptBin "sup" ''
 	# Collect garbage
 	if [[ "$1" == "help" ]]; then
-		echo "Arguments:\nhelp - display a helpful help message\ngc - run garbage collection\nboot - create a boot entry instead of switching\nnu - switch to a new configuration without updating\notherwise unrecognized arguments are used to update more inputs than just nixpkgs-unstable and nixpkgs-stabel and no arguments updates and switches"
+		echo -e "Arguments:\nhelp - display a helpful help message\ngc - run garbage collection\nboot - create a boot entry instead of switching\nnu - switch to a new configuration without updating\notherwise unrecognized arguments are used to update more inputs than just nixpkgs-unstable and nixpkgs-stabel and no arguments updates and switches"
 		exit 0
 	elif [[ "$1" == "gc" ]]; then
 		nix-collect-garbage -d
