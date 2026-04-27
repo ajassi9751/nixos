@@ -1,7 +1,10 @@
 {writeShellScriptBin, bash}:
 writeShellScriptBin "sup" ''
 	# Collect garbage
-	if [[ "$1" == "gc" ]]; then
+	if [[ "$1" == "help" ]]; then
+		echo "Arguments:\nhelp - display a helpful help message\ngc - run garbage collection\nboot - create a boot entry instead of switching\nnu - switch to a new configuration without updating\notherwise unrecognized arguments are used to update more inputs than just nixpkgs-unstable and nixpkgs-stabel and no arguments updates and switches"
+		exit 0
+	elif [[ "$1" == "gc" ]]; then
 		nix-collect-garbage -d
 		exit 0
 	fi
@@ -21,7 +24,7 @@ writeShellScriptBin "sup" ''
 	elif [[ "$1" == "boot" ]]; then
 		cd /etc/nixos
 		nix flake update nixpkgs-unstable nixpkgs-stable --commit-lock-file
-		nixos-rebuild switch --upgrade --flake /etc/nixos#system	
+		nixos-rebuild boot --upgrade --flake /etc/nixos#system
 		exit 0
 	# Stands for no update, doesn't update the packages, just switches
 	elif [[ "$1" == "nu" ]]; then
