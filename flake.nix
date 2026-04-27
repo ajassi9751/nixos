@@ -17,7 +17,6 @@
     pkgs-unstable = import nixpkgs-unstable { inherit system; };
     pkgs-stable = import nixpkgs-stable { inherit system; };
     pkgs-old = import nixpkgs-old { inherit system; };
-    # etcherPkg = pkgs-unstable.callPackage ./etcher.nix { };
   in
   {
 	nixosConfigurations.system = nixpkgs-unstable.lib.nixosSystem {
