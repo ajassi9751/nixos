@@ -1,5 +1,10 @@
 {writeShellScriptBin, bash}:
 writeShellScriptBin "sup" ''
+	# Collect garbage
+	if [[ "$1" == "gc" ]]; then
+		nix-collect-garbage -d
+		exit 0
+	fi
 	# Should change for specific premissions
 	# Make sure we are root
 	if [[ $(whoami) != "root" ]]; then
@@ -17,6 +22,15 @@ writeShellScriptBin "sup" ''
 		cd /etc/nixos
 		nix flake update nixpkgs-unstable nixpkgs-stable --commit-lock-file
 		nixos-rebuild switch --upgrade --flake /etc/nixos#system	
+		exit 0
+	# Stands for no update, doesn't update the packages, just switches
+	elif [[ "$1" == "nu" ]]; then
+		nixos-rebuild switch --flake /etc/nixos#system
+	# Update any additional inputs
+	else
+		cd /etc/nixos
+		nix flake update nixpkgs-unstable nixpkgs-stable "$@" --commit-lock-file
+		nixos-rebuild switch --upgrade --flake /etc/nixos#system
 		exit 0
 	fi
 ''
