@@ -207,6 +207,7 @@
     # lutris # Will use if needed
     # heroic # Also will use if needed
     # bottles # Same as the other two
+    vlc
   ];
 
   environment.sessionVariables = {
