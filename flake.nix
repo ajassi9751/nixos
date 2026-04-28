@@ -3,7 +3,8 @@
 
   inputs = {
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
+    # nixpkgs-super-unstable = "github:nixos/nixpkgs"; # Most bleeding edge packages before they are even built by hydra so it forces constant recompilation
     # Old version of nixpgks for neofetch
     nixpkgs-old.url = "github:nixos/nixpkgs/nixos-24.05";
     hyprland.url = "github:hyprwm/Hyprland";

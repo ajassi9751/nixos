@@ -175,7 +175,7 @@
     cowsay
     btop
     wl-clipboard
-    awww
+    swww # Replace with awww when needed
     ripgrep
     fzf
     fish
