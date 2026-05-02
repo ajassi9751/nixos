@@ -7,12 +7,11 @@
     # nixpkgs-super-unstable = "github:nixos/nixpkgs"; # Most bleeding edge packages before they are even built by hydra so it forces constant recompilation
     # Old version of nixpgks for neofetch
     nixpkgs-old.url = "github:nixos/nixpkgs/nixos-24.05";
-    hyprland.url = "github:hyprwm/Hyprland";
     # Frc-nix input for frc stuff
     frc-nix.url = "github:frc4451/frc-nix";
   };
 
-  outputs = { self, nixpkgs-unstable, nixpkgs-stable, nixpkgs-old, hyprland, frc-nix } @ inputs:
+  outputs = { self, nixpkgs-unstable, nixpkgs-stable, nixpkgs-old, frc-nix } @ inputs:
   let
     system = "x86_64-linux";
     pkgs-unstable = import nixpkgs-unstable { inherit system; };
@@ -22,7 +21,7 @@
   {
 	# Make sure that configuration.nix gets the stable packages
 	nixosConfigurations.system = nixpkgs-stable.lib.nixosSystem {
-		specialArgs = { inherit inputs; };
+		specialArgs = { inherit inputs nixpkgs-unstable; };
 		modules = [
 			./configuration.nix
 			{

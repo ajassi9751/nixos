@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ inputs, config, pkgs, ... }:
+{ inputs, config, pkgs, nixpkgs-unstable, ... }:
 
 {
   imports =
@@ -110,14 +110,15 @@
   programs.hyprland = {
   	enable = true;
   	xwayland.enable = true;
-	package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-	portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+	# Need to figure out how to use unstable
+	# package = nixpkgs-unstable.hyprland;
+	# portalPackage = nixpkgs-unstable.xdg-desktop-portal-hyprland;
   };
   programs.neovim = { enable = true; };
 
   programs.git = {
   	enable = true;
-	package = pkgs.gitFull;
+	# package = pkgs.gitFull;
 	config = {
 		user.name = "Aikam Jassi";
 		user.email = "ajassi9751@gmail.com";
