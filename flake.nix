@@ -31,7 +31,6 @@
 					yazi
 					foot
 					pkgs-old.neofetch
-					# etcherPkg
 				];
 			}
 			{
