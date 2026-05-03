@@ -21,7 +21,7 @@
   {
 	# Make sure that configuration.nix gets the stable packages
 	nixosConfigurations.system = nixpkgs-stable.lib.nixosSystem {
-		specialArgs = { inherit inputs nixpkgs-unstable; };
+		specialArgs = { inherit inputs system; pkgs-unstable = nixpkgs-unstable; };
 		modules = [
 			./configuration.nix
 			{
@@ -30,6 +30,7 @@
 					ghostty
 					yazi
 					foot
+					awww
 					pkgs-old.neofetch
 				];
 			}

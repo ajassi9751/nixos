@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ inputs, config, pkgs, nixpkgs-unstable, ... }:
+{ inputs, config, pkgs, pkgs-unstable, system, ... }:
 
 {
   imports =
@@ -111,8 +111,8 @@
   	enable = true;
   	xwayland.enable = true;
 	# Need to figure out how to use unstable
-	# package = nixpkgs-unstable.hyprland;
-	# portalPackage = nixpkgs-unstable.xdg-desktop-portal-hyprland;
+	package = pkgs-unstable.legacyPackages.${system}.hyprland;
+	portalPackage = pkgs-unstable.legacyPackages.${system}.xdg-desktop-portal-hyprland;
   };
   programs.neovim = { enable = true; };
 
@@ -176,7 +176,6 @@
     cowsay
     btop
     wl-clipboard
-    swww # Replace with awww when needed
     ripgrep
     fzf
     fish
