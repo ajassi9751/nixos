@@ -194,7 +194,7 @@
     pciutils
     localsend
     brave
-    chromium
+    # chromium
     playerctl
     brightnessctl
     ffmpeg
