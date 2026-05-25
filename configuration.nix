@@ -105,7 +105,7 @@
     ];
   };
 
-  # Install firefox.
+  programs.appimage.enable = true;
   programs.firefox.enable = true;
   programs.hyprland = {
   	enable = true;
