@@ -105,6 +105,15 @@
     ];
   };
 
+  users.users.harnoor = {
+    isNormalUser = true;
+    description = "Harnoors account for lab";
+    extraGroups = [ "networkmanager" "wheel" ];
+    packages = with pkgs; [
+    #  thunderbird
+    ];
+  };
+
   programs.appimage.enable = true;
   programs.firefox.enable = true;
   programs.hyprland = {
