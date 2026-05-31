@@ -217,6 +217,7 @@
     # heroic # Also will use if needed
     # bottles # Same as the other two
     vlc
+    zig
   ];
 
   environment.sessionVariables = {
