@@ -218,6 +218,7 @@
     # bottles # Same as the other two
     vlc
     zig
+    prismlauncher
   ];
 
   environment.sessionVariables = {
