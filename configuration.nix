@@ -159,6 +159,8 @@
 
   programs.gamemode.enable = true;
 
+  programs.kdeconnect.enable = true;
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -217,7 +219,7 @@
     # heroic # Also will use if needed
     # bottles # Same as the other two
     vlc
-    zig
+    # zig
     prismlauncher
   ];
 
