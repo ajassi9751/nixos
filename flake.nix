@@ -32,6 +32,11 @@
 					foot
 					awww
 					pkgs-old.neofetch
+					cargo
+					# rustc
+					gcc
+					clang
+
 				];
 			}
 			{

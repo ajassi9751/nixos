@@ -172,8 +172,6 @@
     wget
     # ghostty
     # yazi
-    cargo
-    rustc
     rofi
     quickshell
     cava
@@ -182,8 +180,6 @@
     hyprlock
     zsh
     gh
-    gcc
-    clang
     cowsay
     btop
     wl-clipboard
