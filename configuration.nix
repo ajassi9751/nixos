@@ -30,6 +30,9 @@
     writebackDevice = "/dev/sda3";
   };
 
+  # Userspace oom killer
+  systemd.oomd.enable = true;
+
   #  specialisation = {
   #    lts-kernel.configuration = {
   # boot.kernelPackages = pkgs.linuxPackages;	
