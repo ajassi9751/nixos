@@ -36,7 +36,10 @@
   systemd.oomd.enable = true;
 
   boot.kernel.sysctl = {
-    "vm.swappiness" = 10; # Keep program memory out of swap and prefer it over filesystem cache (better for pc's)
+    "vm.swappiness" = 10; # Keep program memory out of swap and prefer it over filesystem cache (better for pc's). default: 60
+    "vm.vfs_cache_pressure" = 50; # Keep filesystem metadata in memory. default: 100
+    "vm.dirty_ratio" = 10; # Flush dirty pages more often to help against crashes and pauses in io. default: 20
+    "vm.dirty_background_ratio" = 5; # Controls when background flushing starts. default: ?
   };
 
   #  specialisation = {
