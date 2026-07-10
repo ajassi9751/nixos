@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ inputs, config, pkgs, pkgs-unstable, system, ... }:
+{ inputs, config, lib, pkgs, pkgs-unstable, system, ... }:
 
 {
   imports =
@@ -17,6 +17,18 @@
 
   # Latest kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  # Forcefully clear the hardware-generated swap devices
+  swapDevices = lib.mkForce [ ];
+
+  # Configure zram
+  zramSwap = {
+    enable = true;
+    priority = 100;
+    algorithm = "lz4";
+    memoryPercent = 50;
+    writebackDevice = "/dev/sda3";
+  };
 
   #  specialisation = {
   #    lts-kernel.configuration = {
