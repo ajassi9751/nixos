@@ -125,6 +125,7 @@
   };
   programs.neovim = {
       package = pkgs-unstable.legacyPackages.${system}.neovim-unwrapped;
+      defaultEditor = true;
       enable = true;
   };
 
