@@ -2,7 +2,7 @@
 writeShellScriptBin "sup" ''
 	# Collect garbage
 	if [[ "$1" == "help" ]]; then
-		echo -e "Arguments:\nhelp - display a helpful help message\ngc - run garbage collection\nboot - create a boot entry instead of switching\nnu - switch to a new configuration without updating\notherwise unrecognized arguments are used to update more inputs than just nixpkgs-unstable and nixpkgs-stable and no arguments updates and switches"
+		echo -e "Arguments:\nhelp - display a helpful help message\ngc - run garbage collection\nboot - create a boot entry instead of switching\nnu - switch to a new configuration without updating\ncheck - check the configuration\notherwise unrecognized arguments are used to update more inputs than just nixpkgs-unstable and nixpkgs-stable and no arguments updates and switches"
 		exit 0
 	elif [[ "$1" == "gc" ]]; then
 		nix-collect-garbage -d
@@ -29,6 +29,10 @@ writeShellScriptBin "sup" ''
 	# Stands for no update, doesn't update the packages, just switches
 	elif [[ "$1" == "nu" ]]; then
 		nixos-rebuild switch --flake /etc/nixos#system
+		exit 0
+	elif [[ "$1" == "check" ]]; then
+		nixos-rebuild dry-activate --flake /etc/nixos#system
+		exit 0
 	# Update any additional inputs
 	else
 		cd /etc/nixos
