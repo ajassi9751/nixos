@@ -35,6 +35,10 @@
   # Userspace oom killer which helps with zram
   systemd.oomd.enable = true;
 
+  boot.kernel.sysctl = {
+    "vm.swappiness" = 10; # Keep program memory out of swap and prefer it over filesystem cache (better for pc's)
+  };
+
   #  specialisation = {
   #    lts-kernel.configuration = {
   # boot.kernelPackages = pkgs.linuxPackages;	
