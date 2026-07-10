@@ -18,19 +18,21 @@
   # Latest kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  # SYSTEM TWEAKS
+
   # Forcefully clear the hardware-generated swap devices
   swapDevices = lib.mkForce [ ];
 
   # Configure zram
   zramSwap = {
     enable = true;
-    priority = 100;
-    algorithm = "lz4";
-    memoryPercent = 50;
-    writebackDevice = "/dev/sda3";
+    priority = 100; # Not relevant but gives it higher priority than regular swap
+    algorithm = "lz4"; # lz4 algorithm is lighter but compresses less than zstd
+    memoryPercent = 50; # Can use up to 50% of memory to compress
+    writebackDevice = "/dev/sda3"; # Uses this partition in case there is too much data
   };
 
-  # Userspace oom killer
+  # Userspace oom killer which helps with zram
   systemd.oomd.enable = true;
 
   #  specialisation = {
@@ -38,6 +40,8 @@
   # boot.kernelPackages = pkgs.linuxPackages;	
   #    };
   #  };
+
+  # DEFAULT STUFF
 
   networking.hostName = "aikamnix"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -71,10 +75,6 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
 
   xdg.portal = {
     enable = true;
@@ -129,12 +129,36 @@
     ];
   };
 
+  # Some programs need SUID wrappers, can be configured further or are
+  # started in user sessions.
+  # programs.mtr.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
+
+  # List services that you want to enable:
+
+  # Enable the OpenSSH daemon.
+  services.openssh.enable = true;
+
+  # Open ports in the firewall.
+  # networking.firewall.allowedTCPPorts = [ ... ];
+  # networking.firewall.allowedUDPPorts = [ ... ];
+  # Or disable the firewall altogether.
+  # networking.firewall.enable = false;
+
+  # STUFF I INSTALLED
+
+  # Enable the KDE Desktop Environment and the login manager
+  services.displayManager.sddm.enable = true;
+  services.desktopManager.plasma6.enable = true;
+
   programs.appimage.enable = true;
   programs.firefox.enable = true;
   programs.hyprland = {
   	enable = true;
   	xwayland.enable = true;
-	# Need to figure out how to use unstable
 	package = pkgs-unstable.legacyPackages.${system}.hyprland;
 	portalPackage = pkgs-unstable.legacyPackages.${system}.xdg-desktop-portal-hyprland;
   };
@@ -247,24 +271,7 @@
     nerd-fonts.jetbrains-mono
   ];
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  # THE MAGIC NUMBER
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -273,5 +280,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.11"; # Did you read the comment?
-
 }
