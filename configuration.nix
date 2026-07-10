@@ -123,7 +123,10 @@
 	package = pkgs-unstable.legacyPackages.${system}.hyprland;
 	portalPackage = pkgs-unstable.legacyPackages.${system}.xdg-desktop-portal-hyprland;
   };
-  programs.neovim = { enable = true; };
+  programs.neovim = {
+      package = pkgs-unstable.legacyPackages.${system}.neovim-unwrapped;
+      enable = true;
+  };
 
   programs.git = {
   	enable = true;
