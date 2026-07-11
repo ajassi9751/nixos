@@ -20,6 +20,12 @@
 
   # SYSTEM TWEAKS
 
+  boot.kernelParams = [
+    "isolcpus=1-3"
+    "nohz_full=1-3"
+    "rcu_nocbs=1-3"
+  ];
+
   # Forcefully clear the hardware-generated swap devices
   swapDevices = lib.mkForce [ ];
 
