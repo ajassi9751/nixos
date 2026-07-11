@@ -20,7 +20,7 @@
 
   # SYSTEM TWEAKS
 
-  boot.kernelModules = [ "bfq" ]; # Load bfq kernel module
+  # boot.kernelModules = [ "bfq" ]; # Load bfq kernel module
 
   # Relies on hardware!
   # Enable full tickless mode on cpus 1-3 (0 is left regular on purpose)
@@ -31,22 +31,6 @@
     "rcu_nocbs=1-3"
     # "elevator=bfq"
   ];
-
-  # Relies on hardware!
-  # Service to set bfq as the scheduler
-  # I don't really like this and its not very nix like
-  systemd.services.set-bfq = {
-    description = "Set BFQ I/O scheduler";
-    wantedBy = [ "multi-user.target" ];
-    after = [ "local-fs.target" ];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = [
-        # Relies on path, bad
-        "${pkgs.bash}/bin/bash -c echo bfq | tee /sys/block/sda/queue/scheduler"
-      ];
-    };
-  };
 
   # Forcefully clear the hardware-generated swap devices
   swapDevices = lib.mkForce [ ];
