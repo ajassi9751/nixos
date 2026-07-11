@@ -20,6 +20,8 @@
 
   # SYSTEM TWEAKS
 
+  boot.kernelParams = [ "elevator=bfq" "readahead=512" ];
+
   # Forcefully clear the hardware-generated swap devices
   swapDevices = lib.mkForce [ ];
 
