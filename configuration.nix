@@ -22,16 +22,6 @@
 
   # boot.kernelModules = [ "bfq" ]; # Load bfq kernel module
 
-  # Relies on hardware!
-  # Enable full tickless mode on cpus 1-3 (0 is left regular on purpose)
-  # Kinda fishy tho
-  boot.kernelParams = [
-    "isolcpus=1-3"
-    "nohz_full=1-3"
-    "rcu_nocbs=1-3"
-    # "elevator=bfq"
-  ];
-
   # Forcefully clear the hardware-generated swap devices
   swapDevices = lib.mkForce [ ];
 
