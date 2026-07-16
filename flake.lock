@@ -22,11 +22,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1777394698,
-        "narHash": "sha256-ErE9Q7XqAbHJ6lP7liGyBQ7cLg3YPP/AYPtP2dzAIvw=",
+        "lastModified": 1780163740,
+        "narHash": "sha256-lv9glKM9uzuwejxLxym4WHVbQUCxqeWzbv7DDTWNrDE=",
         "owner": "frc4451",
         "repo": "frc-nix",
-        "rev": "a49aa400f1cdd237f0efc0f227e2095b840e51f0",
+        "rev": "b8330150ee7b85e182d535fbd894b48122ba0e0d",
         "type": "github"
       },
       "original": {
