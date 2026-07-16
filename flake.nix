@@ -9,9 +9,14 @@
     nixpkgs-old.url = "github:nixos/nixpkgs/nixos-24.05";
     # Frc-nix input for frc stuff
     frc-nix.url = "github:frc4451/frc-nix";
+    # Nix neovim config tool
+    nvf = {
+      url = "github:NotAShelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
-  outputs = { self, nixpkgs-unstable, nixpkgs-stable, nixpkgs-old, frc-nix } @ inputs:
+  outputs = { self, nixpkgs-unstable, nixpkgs-stable, nixpkgs-old, frc-nix, nvf} @ inputs:
   let
     system = "x86_64-linux";
     pkgs-unstable = import nixpkgs-unstable { inherit system; };
@@ -33,7 +38,7 @@
 					awww
 					pkgs-old.neofetch
 					cargo
-					# rustc
+					rustc
 					gcc
 					clang
 
@@ -55,6 +60,34 @@
 				environment.systemPackages = [
 					(pkgs-unstable.callPackage ./update-utils.nix {})
 				];
+			}
+			nvf.nixosModules.default
+			{
+				# NVF config
+				programs.nvf = {
+					enable = true;
+					settings = {
+						vim = {	
+							vimAlias = false;
+							lsp.enable = true;
+							telescope.enable = true;
+							autocomplete.nvim-cmp.enable = true;
+                                                        utility.oil-nvim.enable = true;
+                                                        utility.motion.flash-nvim.enable = true;
+                                                        git.gitsigns.enable = true;
+							languages = {
+								enableTreesitter = true;
+
+								rust.enable = true;
+								nix.enable = true;
+								clang.enable = true;
+								lua.enable = true;
+                                                                make.enable = true;
+                                                                cmake.enable = true;
+							};
+						};	
+					};
+				};
 			}
 		];
 	};
