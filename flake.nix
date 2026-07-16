@@ -68,6 +68,13 @@
 					enable = true;
 					settings = {
 						vim = {	
+                                                        theme = {
+                                                                enable = true;
+                                                                name = "gruvbox";
+                                                                style = "dark";
+                                                                # Hopefully doesn't conflict and instead compliments terminal transparency
+                                                                transparent = true;
+                                                        };
 							vimAlias = false;
 							lsp.enable = true;
 							telescope.enable = true;
