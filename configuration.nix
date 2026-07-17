@@ -44,11 +44,36 @@
     "vm.dirty_background_ratio" = 5; # Controls when background flushing starts. default: ?
   };
 
-  #  specialisation = {
-  #    lts-kernel.configuration = {
-  # boot.kernelPackages = pkgs.linuxPackages;	
-  #    };
-  #  };
+  # Keeps ssds healthy, its already enabled by default but this is to make it sure and explicit
+  services.fstrim.enable = true; 
+
+  # Power Tweaks
+  
+  # Ssd health stuff and helps with power as it gives info to tlp
+  services.smartd.enable = true;
+
+  # Disable power profiles daemon as tlp is better on older laptops (It also may be worse for window managers)
+  services.power-profiles-daemon.enable = false;
+
+  services.tlp = {
+    enable = true;
+    settings = {
+      # Enable the Radio Device Wizard
+      BAY_POWEROFF_ON_AC = 0;
+      BAY_POWEROFF_ON_BAT = 1;
+
+      # Leave NFC alone
+      RDW_EXCLUDE_NFC = 1;
+
+      # No wifi with ethernet
+      DEVICES_TO_DISABLE_ON_LAN_CONNECT = "wifi wwan";
+      DEVICES_TO_ENABLE_ON_LAN_DISCONNECT = "wifi wwan";
+
+      # Stops connecting to cellular data on wifi
+      DEVICES_TO_DISABLE_ON_WIFI_CONNECT = "wwan";
+      DEVICES_TO_ENABLE_ON_WIFI_DISCONNECT = "wwan";
+    };
+  };
 
   # DEFAULT STUFF
 
