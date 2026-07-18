@@ -234,6 +234,8 @@
 	gamescopeSession.enable = true;
   };
 
+  services.tailscale.enable = true;
+
   programs.gamemode.enable = true;
 
   programs.kdeconnect.enable = true;
@@ -297,7 +299,6 @@
     # zig
     prismlauncher
     obs-studio
-    tailscale
   ];
 
   environment.sessionVariables = {
