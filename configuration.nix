@@ -246,7 +246,8 @@
   environment.systemPackages = with pkgs; [
     # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     vim
-    wget
+    curl
+    # wget
     # ghostty
     # yazi
     rofi
@@ -262,21 +263,22 @@
     wl-clipboard
     ripgrep
     fzf
-    fish
-    stylua
+    # fish
+    # stylua
     clang-tools
     rust-analyzer
     rustfmt
-    tmux
-    popsicle
-    cmake
+    # tmux
+    # popsicle
+    # cmake
     gnumake
     p7zip
     zip
     unzip
+    # Maybe remove zoxide
     zoxide
     pciutils
-    localsend
+    # localsend
     brave
     # chromium
     playerctl
@@ -284,16 +286,18 @@
     ffmpeg
     pavucontrol
     qemu
-    gdb
+    # gdb
     mangohud
     protonup-ng
-    ckan
+    # ckan
     # lutris # Will use if needed
     # heroic # Also will use if needed
     # bottles # Same as the other two
     vlc
     # zig
     prismlauncher
+    obs-studio
+    tailscale
   ];
 
   environment.sessionVariables = {
