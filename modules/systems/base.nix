@@ -72,7 +72,7 @@
         LC_TIME = "en_US.UTF-8";
       };
 
-      # Look into nix.gc and system.autoUpgrde for auto gc and auto updates especially for servers
+      # Look into system.autoUpgrde for auto updates especially for servers
       nix = {
         settings = {
           experimental-features = [
@@ -81,7 +81,15 @@
           ];
           auto-optimise-store = true;
         };
+        gc = {
+          automatic = true;
+          dates = "weekly";
+          options = "--delete-older-than 7d"; # Automatically wipes generations older than 7 days
+        };
       };
+
+      # Limit the maximum number of configurations shown in systemd-boot menu
+      boot.loader.systemd-boot.configurationLimit = 10;
 
       # Enable CUPS to print documents.
       services.printing.enable = true;
