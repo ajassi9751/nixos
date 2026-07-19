@@ -1,6 +1,6 @@
 { self, inputs, ... }: {
   flake.nixosModules.base-system =
-    { pkgs, pkgs-unstable, pkgs-old, system-arch, swap-write-device, ... }:
+    { pkgs, pkgs-unstable, pkgs-old, system-arch, swap-write-device, hostname, ... }:
     {
       # Bootloader.
       boot.loader.systemd-boot.enable = true;
@@ -36,7 +36,7 @@
       programs.appimage.enable = true;
 
       # Maybe change this
-      networking.hostName = "aikamnix"; # Define your hostname.
+      networking.hostName = hostname; # Define your hostname.
       # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
       # Configure network proxy if necessary

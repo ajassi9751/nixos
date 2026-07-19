@@ -2,20 +2,21 @@
 let
   system-arch = "x86_64-linux";
   swap-write-device = "/dev/sda3";
+  hostname = "hptop";
 in
 {
   flake.nixosConfigurations.hptop = inputs.nixpkgs.lib.nixosSystem {
 
     specialArgs = {
       pkgs-unstable = import inputs.nixpkgs-unstable {
-        system = "x86_64-linux";
+        system = system-arch;
         config.allowUnfree = true;
       };
       pkgs-old = import inputs.nixpkgs-old {
-        system = "x86_64-linux";
+        system = system-arch;
         config.allowUnfree = true;
       };
-      inherit inputs system-arch swap-write-device;
+      inherit inputs system-arch swap-write-device hostname;
     };
 
     # This is kind of like composition
