@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     # Nixpkgs-stable
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     nixpkgs-old.url = "github:nixos/nixpkgs/nixos-24.05";
     frc-nix.url = "github:frc4451/frc-nix";
     import-tree.url = "github:denful/import-tree";
