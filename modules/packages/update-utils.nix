@@ -20,20 +20,20 @@
 	                        if [[ -z "$1" ]]; then
 	                        	cd /etc/nixos
 	                        	nix flake update nixpkgs-unstable nixpkgs-stable --commit-lock-file
-	                        	nixos-rebuild switch --upgrade --flake /etc/nixos#system
+	                        	nixos-rebuild switch --upgrade --flake /etc/nixos#hptop
 	                        	exit 0
 	                        # Create a boot entry instead of switching
 	                        elif [[ "$1" == "boot" ]]; then
 	                        	cd /etc/nixos
 	                        	nix flake update nixpkgs-unstable nixpkgs-stable --commit-lock-file
-	                        	nixos-rebuild boot --upgrade --flake /etc/nixos#system
+	                        	nixos-rebuild boot --upgrade --flake /etc/nixos#hptop
 	                        	exit 0
 	                        # Stands for no update, doesn't update the packages, just switches
 	                        elif [[ "$1" == "nu" ]]; then
-	                        	nixos-rebuild switch --flake /etc/nixos#system
+	                        	nixos-rebuild switch --flake /etc/nixos#hptop
 	                        	exit 0
 	                        elif [[ "$1" == "check" ]]; then
-	                        	nixos-rebuild dry-activate --flake /etc/nixos#system
+	                        	nixos-rebuild dry-activate --flake /etc/nixos#hptop
 	                        	exit 0
 	                        # Update any additional inputs
 	                        else
