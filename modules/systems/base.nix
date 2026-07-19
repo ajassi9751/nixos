@@ -1,7 +1,6 @@
-{ inputs, ... }: {
+{ self, inputs, ... }: {
   flake.nixosModules.base-system =
-    { pkgs, system, ... }:
-
+    { pkgs, pkgs-old, system-arch, swap-write-device, ... }:
     {
       # Bootloader.
       boot.loader.systemd-boot.enable = true;
@@ -11,65 +10,30 @@
       # Latest kernel
       boot.kernelPackages = pkgs.linuxPackages_latest;
 
-      # SYSTEM TWEAKS
-
-      # boot.kernelModules = [ "bfq" ]; # Load bfq kernel module
-
       # Forcefully clear the hardware-generated swap devices
       swapDevices = pkgs.lib.mkForce [ ];
 
+      # May not be the best for servers but I care about ssd life
       # Configure zram
       zramSwap = {
         enable = true;
         priority = 100; # Not relevant but gives it higher priority than regular swap
         algorithm = "lz4"; # lz4 algorithm is lighter but compresses less than zstd
         memoryPercent = 50; # Can use up to 50% of memory to compress
-        writebackDevice = "/dev/sda3"; # Uses this partition in case there is too much data
+        writebackDevice = swap-write-device; # Uses this partition in case there is too much data
       };
 
+      # I also don't know if this is good for servers
       # Userspace oom killer which helps with zram
       systemd.oomd.enable = true;
-
-      boot.kernel.sysctl = {
-        "vm.swappiness" = 10; # Keep program memory out of swap and prefer it over filesystem cache (better for pc's). default: 60
-        "vm.vfs_cache_pressure" = 50; # Keep filesystem metadata in memory. default: 100
-        "vm.dirty_ratio" = 10; # Flush dirty pages more often to help against crashes and pauses in io. default: 20
-        "vm.dirty_background_ratio" = 5; # Controls when background flushing starts. default: ?
-      };
 
       # Keeps ssds healthy, its already enabled by default but this is to make it sure and explicit
       services.fstrim.enable = true;
 
-      # Power Tweaks
-
       # Ssd health stuff and helps with power as it gives info to tlp
       services.smartd.enable = true;
 
-      # Disable power profiles daemon as tlp is better on older laptops (It also may be worse for window managers)
-      services.power-profiles-daemon.enable = false;
-
-      services.tlp = {
-        enable = true;
-        settings = {
-          # Enable the Radio Device Wizard
-          BAY_POWEROFF_ON_AC = 0;
-          BAY_POWEROFF_ON_BAT = 1;
-
-          # Leave NFC alone
-          RDW_EXCLUDE_NFC = 1;
-
-          # No wifi with ethernet
-          DEVICES_TO_DISABLE_ON_LAN_CONNECT = "wifi wwan";
-          DEVICES_TO_ENABLE_ON_LAN_DISCONNECT = "wifi wwan";
-
-          # Stops connecting to cellular data on wifi
-          DEVICES_TO_DISABLE_ON_WIFI_CONNECT = "wwan";
-          DEVICES_TO_ENABLE_ON_WIFI_DISCONNECT = "wwan";
-        };
-      };
-
-      # DEFAULT STUFF
-
+      # Maybe change this
       networking.hostName = "aikamnix"; # Define your hostname.
       # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -108,42 +72,12 @@
         };
       };
 
-      # Enable the X11 windowing system.
-      services.xserver.enable = true;
-
-      xdg.portal = {
-        enable = true;
-        extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-      };
-
-      # Configure keymap in X11
-      services.xserver.xkb = {
-        layout = "us";
-        variant = "";
-      };
-
       # Enable CUPS to print documents.
       services.printing.enable = true;
 
-      # Enable sound with pipewire.
-      services.pulseaudio.enable = false;
       security.rtkit.enable = true;
-      services.pipewire = {
-        enable = true;
-        alsa.enable = true;
-        alsa.support32Bit = true;
-        pulse.enable = true;
-        # If you want to use JACK applications, uncomment this
-        #jack.enable = true;
 
-        # use the example session manager (no others are packaged yet so this is enabled by default,
-        # no need to redefine it in your config for now)
-        #media-session.enable = true;
-      };
-
-      # Enable touchpad support (enabled default in most desktopManager).
-      # services.xserver.libinput.enable = true;
-
+      # May want to change for servers
       # Define a user account. Don't forget to set a password with ‘passwd’.
       users.users.aikam = {
         # shell = "${pkgs.zsh}/bin/zsh";
@@ -189,26 +123,14 @@
       # Or disable the firewall altogether.
       # networking.firewall.enable = false;
 
-      # STUFF I INSTALLED
-
-      # Enable the KDE Desktop Environment and the login manager
-      services.displayManager.sddm.enable = true;
-      services.desktopManager.plasma6.enable = true;
-
-      programs.appimage.enable = true;
-      programs.firefox.enable = true;
-      programs.hyprland = {
-        enable = true;
-        xwayland.enable = true;
-        package = inputs.nixpkgs-unstable.legacyPackages.${system}.hyprland;
-        portalPackage = inputs.nixpkgs-unstable.legacyPackages.${system}.xdg-desktop-portal-hyprland;
-      };
+      # Maybe make this a separate config
       programs.neovim = {
-        package = inputs.nixpkgs-unstable.legacyPackages.${system}.neovim-unwrapped;
+        package = inputs.nixpkgs-unstable.legacyPackages.${system-arch}.neovim-unwrapped;
         defaultEditor = true;
         enable = true;
       };
 
+      # Should make this a separate config
       programs.git = {
         enable = true;
         # package = pkgs.gitFull;
@@ -242,17 +164,9 @@
         };
       };
 
-      programs.steam = {
-        enable = true;
-        gamescopeSession.enable = true;
-      };
-
       services.tailscale.enable = true;
 
-      programs.gamemode.enable = true;
-
-      programs.kdeconnect.enable = true;
-
+      # Maybe use pkgs for this
       # Allow unfree packages
       nixpkgs.config.allowUnfree = true;
 
@@ -263,14 +177,8 @@
         vim
         curl
         # wget
-        # ghostty
-        # yazi
-        rofi
-        quickshell
-        cava
+        # yazi # Put this here and make it unstable
         fastfetch
-        hypridle
-        hyprlock
         zsh
         gh
         cowsay
@@ -279,13 +187,7 @@
         ripgrep
         fzf
         # fish
-        # stylua
-        clang-tools
-        rust-analyzer
-        rustfmt
         # tmux
-        # popsicle
-        # cmake
         gnumake
         p7zip
         zip
@@ -293,51 +195,14 @@
         # Maybe remove zoxide
         zoxide
         pciutils
-        # localsend
-        brave
-        # chromium
-        playerctl
-        brightnessctl
         ffmpeg
-        pavucontrol
-        qemu
-        # gdb
-        mangohud
-        protonup-ng
-        # ckan
-        # lutris # Will use if needed
-        # heroic # Also will use if needed
-        # bottles # Same as the other two
-        vlc
-        # zig
-        prismlauncher
-        obs-studio
-        # Most likley get rid of these
-        inputs.frc-nix.packages.${system}.vscode-wpilib
-        inputs.frc-nix.packages.${system}.advantagescope
-        inputs.frc-nix.packages.${system}.choreo
-        inputs.frc-nix.packages.${system}.pathplanner
-        inputs.frc-nix.packages.${system}.elastic-dashboard
-        # inputs.frc-nix.packages.${system}.sysid
+        pkgs-old.neofetch
+        self.packages.${system-arch}.update-utils
       ];
-
-      environment.sessionVariables = {
-        STEAM_EXTRA_COMPAT_TOOLS_PATHS = "~/home/.steam/root/compatabilitytools.d"; # Used for protonup
-      };
 
       fonts.packages = with pkgs; [
         jetbrains-mono
         nerd-fonts.jetbrains-mono
       ];
-
-      # THE MAGIC NUMBER
-
-      # This value determines the NixOS release from which the default
-      # settings for stateful data, like file locations and database versions
-      # on your system were taken. It‘s perfectly fine and recommended to leave
-      # this value at the release version of the first install of this system.
-      # Before changing this value read the documentation for this option
-      # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-      system.stateVersion = "25.11"; # Did you read the comment?
     };
 }
