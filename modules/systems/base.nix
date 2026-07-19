@@ -1,6 +1,6 @@
 { self, inputs, ... }: {
   flake.nixosModules.base-system =
-    { pkgs, pkgs-old, system-arch, swap-write-device, ... }:
+    { pkgs, pkgs-unstable, pkgs-old, system-arch, swap-write-device, ... }:
     {
       # Bootloader.
       boot.loader.systemd-boot.enable = true;
@@ -32,6 +32,8 @@
 
       # Ssd health stuff and helps with power as it gives info to tlp
       services.smartd.enable = true;
+
+      programs.appimage.enable = true;
 
       # Maybe change this
       networking.hostName = "aikamnix"; # Define your hostname.
@@ -177,7 +179,6 @@
         vim
         curl
         # wget
-        # yazi # Put this here and make it unstable
         fastfetch
         zsh
         gh
@@ -196,6 +197,7 @@
         zoxide
         pciutils
         ffmpeg
+        pkgs-unstable.yazi
         pkgs-old.neofetch
         self.packages.${system-arch}.update-utils
       ];

@@ -47,7 +47,6 @@
       services.displayManager.sddm.enable = true;
       services.desktopManager.plasma6.enable = true;
 
-      programs.appimage.enable = true;
       programs.firefox.enable = true;
       programs.hyprland = {
         enable = true;
@@ -76,9 +75,6 @@
         hypridle
         hyprlock
         # stylua
-        clang-tools
-        rust-analyzer
-        rustfmt
         # popsicle
         # cmake
         # ghostty # Make this unstable
@@ -107,12 +103,16 @@
         inputs.frc-nix.packages.${system-arch}.pathplanner
         inputs.frc-nix.packages.${system-arch}.elastic-dashboard
         # inputs.frc-nix.packages.${system-arch}.sysid
-        pkgs-unstable.ghostty
-        pkgs-unstable.yazi
+        # Dev tools
+        pkgs-unstable.clang-tools
+        pkgs-unstable.rust-analyzer
+        pkgs-unstable.rustfmt
         pkgs-unstable.cargo
         pkgs-unstable.rustc
         pkgs-unstable.gcc
         pkgs-unstable.clang
+        # Terminals
+        pkgs-unstable.ghostty
         pkgs-unstable.foot
       ];
   };
