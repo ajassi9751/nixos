@@ -3,7 +3,7 @@
     { pkgs, ... }:
     let
       sup-script = pkgs.writeShellScriptBin "sup" ''
-                                        FLAKE_FLAG="--flake /etc/nixos"
+                                        FLAKE_FLAG="--flake /home/aikam/nixos"
                                         # Display help message
         	                        if [[ "$1" == "help" ]]; then
         	                        	echo -e "Arguments:\nhelp - display a helpful help message\ngc - run garbage collection\nboot - create a boot entry instead of switching\nnu - switch to a new configuration without updating\ncheck - check the configuration\notherwise unrecognized arguments are used to update more inputs than just nixpkgs-unstable and nixpkgs and no arguments updates and switches"
