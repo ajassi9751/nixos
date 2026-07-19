@@ -5,7 +5,7 @@ let
   hostname = "powertop";
 in
 {
-  flake.nixosConfigurations.hptop = inputs.nixpkgs.lib.nixosSystem {
+  flake.nixosConfigurations.powertop = inputs.nixpkgs.lib.nixosSystem {
 
     specialArgs = {
       pkgs-unstable = import inputs.nixpkgs-unstable {
