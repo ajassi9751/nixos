@@ -1,6 +1,12 @@
 { inputs, ... }: {
   flake.nixosModules.desktop-system =
-  { pkgs, pkgs-unstable, system-arch, ... }: {
+    {
+      pkgs,
+      pkgs-unstable,
+      system-arch,
+      ...
+    }:
+    {
       # boot.kernelModules = [ "bfq" ]; # Load bfq kernel module
 
       boot.kernel.sysctl = {
@@ -9,7 +15,6 @@
         "vm.dirty_ratio" = 10; # Flush dirty pages more often to help against crashes and pauses in io. default: 20
         "vm.dirty_background_ratio" = 5; # Controls when background flushing starts. default: ?
       };
-
 
       # Enable the X11 windowing system.
       services.xserver.enable = true;
@@ -110,5 +115,5 @@
         # Awww
         pkgs-unstable.awww
       ];
-  };
+    };
 }

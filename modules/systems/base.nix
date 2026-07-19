@@ -1,6 +1,14 @@
 { self, inputs, ... }: {
   flake.nixosModules.base-system =
-    { pkgs, pkgs-unstable, pkgs-old, system-arch, swap-write-device, hostname, ... }:
+    {
+      pkgs,
+      pkgs-unstable,
+      pkgs-old,
+      system-arch,
+      swap-write-device,
+      hostname,
+      ...
+    }:
     {
       # Bootloader.
       boot.loader.systemd-boot.enable = true;
