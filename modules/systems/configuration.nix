@@ -1,15 +1,8 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ inputs, config, lib, pkgs, pkgs-unstable, system, ... }:
+{ inputs, ... }: {
+flake.nixosModules.base-system = 
+{ pkgs, system, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
-
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   # boot.loader.grub.enable = true;
@@ -23,7 +16,7 @@
   # boot.kernelModules = [ "bfq" ]; # Load bfq kernel module
 
   # Forcefully clear the hardware-generated swap devices
-  swapDevices = lib.mkForce [ ];
+  swapDevices = pkgs.lib.mkForce [ ];
 
   # Configure zram
   zramSwap = {
@@ -193,11 +186,11 @@
   programs.hyprland = {
   	enable = true;
   	xwayland.enable = true;
-	package = pkgs-unstable.legacyPackages.${system}.hyprland;
-	portalPackage = pkgs-unstable.legacyPackages.${system}.xdg-desktop-portal-hyprland;
+	package = inputs.nixpkgs-unstable.legacyPackages.${system}.hyprland;
+	portalPackage = inputs.nixpkgs-unstable.legacyPackages.${system}.xdg-desktop-portal-hyprland;
   };
   programs.neovim = {
-      package = pkgs-unstable.legacyPackages.${system}.neovim-unwrapped;
+      package = inputs.nixpkgs-unstable.legacyPackages.${system}.neovim-unwrapped;
       defaultEditor = true;
       enable = true;
   };
@@ -299,6 +292,13 @@
     # zig
     prismlauncher
     obs-studio
+    # Most likley get rid of these
+    inputs.frc-nix.packages.${system}.vscode-wpilib
+    inputs.frc-nix.packages.${system}.advantagescope
+    inputs.frc-nix.packages.${system}.choreo
+    inputs.frc-nix.packages.${system}.pathplanner
+    inputs.frc-nix.packages.${system}.elastic-dashboard
+    # inputs.frc-nix.packages.${system}.sysid
   ];
 
   environment.sessionVariables = {
@@ -319,4 +319,5 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.11"; # Did you read the comment?
+};
 }
