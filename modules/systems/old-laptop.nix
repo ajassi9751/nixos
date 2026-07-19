@@ -1,5 +1,5 @@
 { inputs, ... }: {
-  flake.nixosModules.laptop-system = { pkgs, system-arch, ... }: {
+  flake.nixosModules.old-laptop-system = { pkgs, system-arch, ... }: {
     # Disable power profiles daemon as tlp is better on older laptops (It also may be worse for window managers)
     services.power-profiles-daemon.enable = false;
 

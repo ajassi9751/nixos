@@ -29,7 +29,7 @@ in
       ./_hardware/hptop.nix
       self.nixosModules.base-system
       self.nixosModules.desktop-system
-      self.nixosModules.laptop-system
+      self.nixosModules.old-laptop-system
       self.nixosModules.nvf-config
       ({ pkgs, ... }: {
         # This value determines the NixOS release from which the default
