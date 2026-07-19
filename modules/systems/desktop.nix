@@ -114,6 +114,8 @@
         # Terminals
         pkgs-unstable.ghostty
         pkgs-unstable.foot
+        # Awww
+        pkgs-unstable.awww
       ];
   };
 }
