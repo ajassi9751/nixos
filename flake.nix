@@ -6,12 +6,10 @@
     # Nixpkgs-stable
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-old.url = "github:nixos/nixpkgs/nixos-24.05";
-    frc-nix.url = "github:frc4451/frc-nix";
-
-    # 1. Pull in import-tree and flake-parts
+    # I don't really use frc-nix so im removing it
+    # frc-nix.url = "github:frc4451/frc-nix";
     import-tree.url = "github:denful/import-tree";
     flake-parts.url = "github:hercules-ci/flake-parts";
-
     nvf = {
       url = "github:NotAShelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs-unstable";

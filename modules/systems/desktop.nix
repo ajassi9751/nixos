@@ -96,12 +96,12 @@
         # zig
         prismlauncher
         obs-studio
-        # Most likley get rid of these
-        inputs.frc-nix.packages.${system-arch}.vscode-wpilib
-        inputs.frc-nix.packages.${system-arch}.advantagescope
-        inputs.frc-nix.packages.${system-arch}.choreo
-        inputs.frc-nix.packages.${system-arch}.pathplanner
-        inputs.frc-nix.packages.${system-arch}.elastic-dashboard
+        # I don't really use these
+        # inputs.frc-nix.packages.${system-arch}.vscode-wpilib
+        # inputs.frc-nix.packages.${system-arch}.advantagescope
+        # inputs.frc-nix.packages.${system-arch}.choreo
+        # inputs.frc-nix.packages.${system-arch}.pathplanner
+        # inputs.frc-nix.packages.${system-arch}.elastic-dashboard
         # inputs.frc-nix.packages.${system-arch}.sysid
         # Dev tools
         pkgs-unstable.clang-tools
