@@ -21,13 +21,13 @@
         	                        fi
         	                        # If you just want to update
         	                        if [[ -z "$1" ]]; then
-        	                        	cd /etc/nixos
+        	                        	cd /home/aikam/nixos
         	                        	nix flake update nixpkgs-unstable nixpkgs --commit-lock-file
         	                        	nixos-rebuild switch $FLAKE_FLAG
         	                        	exit 0
         	                        # Create a boot entry instead of switching
         	                        elif [[ "$1" == "boot" ]]; then
-        	                        	cd /etc/nixos
+        	                        	cd /home/aikam/nixos
         	                        	nix flake update nixpkgs-unstable nixpkgs --commit-lock-file
         	                        	nixos-rebuild boot $FLAKE_FLAG
         	                        	exit 0
