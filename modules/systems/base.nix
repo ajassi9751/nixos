@@ -10,6 +10,10 @@
       ...
     }:
     {
+      imports = [
+        self.nixosModules.nvf-config
+      ];
+
       # Bootloader.
       boot.loader.systemd-boot.enable = true;
       # boot.loader.grub.enable = true;
@@ -141,13 +145,6 @@
       # networking.firewall.allowedUDPPorts = [ ... ];
       # Or disable the firewall altogether.
       # networking.firewall.enable = false;
-
-      # Maybe make this a separate config
-      programs.neovim = {
-        package = inputs.nixpkgs-unstable.legacyPackages.${system-arch}.neovim-unwrapped;
-        defaultEditor = true;
-        enable = true;
-      };
 
       # Should make this a separate config
       programs.git = {

@@ -30,7 +30,6 @@ in
       self.nixosModules.base-system
       self.nixosModules.desktop-system
       self.nixosModules.old-laptop-system
-      self.nixosModules.nvf-config
       ({ pkgs, ... }: {
         # This value determines the NixOS release from which the default
         # settings for stateful data, like file locations and database versions
