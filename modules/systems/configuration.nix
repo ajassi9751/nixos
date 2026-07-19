@@ -98,7 +98,12 @@ flake.nixosModules.base-system =
     LC_TIME = "en_US.UTF-8";
   };
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix = {
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+      auto-optimise-store = true;
+    };
+  };
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
