@@ -64,6 +64,7 @@
         LC_TIME = "en_US.UTF-8";
       };
 
+      # Look into nix.gc and system.autoUpgrde for auto gc and auto updates especially for servers
       nix = {
         settings = {
           experimental-features = [
