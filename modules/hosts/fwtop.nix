@@ -2,10 +2,10 @@
 let
   system-arch = "x86_64-linux";
   swap-write-device = "/dev/nvme0n1p3";
-  hostname = "powertop";
+  hostname = "fwtop";
 in
 {
-  flake.nixosConfigurations.powertop = inputs.nixpkgs.lib.nixosSystem {
+  flake.nixosConfigurations.fwtop = inputs.nixpkgs.lib.nixosSystem {
 
     specialArgs = {
       pkgs-unstable = import inputs.nixpkgs-unstable {
@@ -26,7 +26,7 @@ in
 
     # This is kind of like composition
     modules = [
-      ./_hardware/powertop.nix # Update this
+      ./_hardware/fwtop.nix # Update this
       self.nixosModules.base-system
       self.nixosModules.desktop-system
       ({ pkgs, ... }: {

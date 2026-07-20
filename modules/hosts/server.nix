@@ -1,11 +1,11 @@
 { self, inputs, ... }:
 let
   system-arch = "x86_64-linux";
-  swap-write-device = "/dev/nvme0n1p3";
-  hostname = "powertop";
+  swap-write-device = "/dev/sda3";
+  hostname = "server";
 in
 {
-  flake.nixosConfigurations.powertop = inputs.nixpkgs.lib.nixosSystem {
+  flake.nixosConfigurations.server = inputs.nixpkgs.lib.nixosSystem {
 
     specialArgs = {
       pkgs-unstable = import inputs.nixpkgs-unstable {
@@ -26,9 +26,9 @@ in
 
     # This is kind of like composition
     modules = [
-      ./_hardware/powertop.nix # Update this
+      ./_hardware/server.nix # Update this
       self.nixosModules.base-system
-      self.nixosModules.desktop-system
+      self.nixosModules.server-system
       ({ pkgs, ... }: {
         # This value determines the NixOS release from which the default
         # settings for stateful data, like file locations and database versions
