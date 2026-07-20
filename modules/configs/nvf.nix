@@ -29,6 +29,7 @@
             lua.enable = true;
             make.enable = true;
             cmake.enable = true;
+            python.enable = true;
           };
         };
       };
