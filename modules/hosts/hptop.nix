@@ -8,14 +8,7 @@ in
   flake.nixosConfigurations.hptop = inputs.nixpkgs.lib.nixosSystem {
 
     specialArgs = {
-      pkgs-unstable = import inputs.nixpkgs-unstable {
-        system = system-arch;
-        config.allowUnfree = true;
-      };
-      pkgs-old = import inputs.nixpkgs-old {
-        system = system-arch;
-        config.allowUnfree = true;
-      };
+      pkgs-unstable = inputs.nixpkgs-unstable.legacyPackages.${system-arch};
       inherit
         inputs
         system-arch

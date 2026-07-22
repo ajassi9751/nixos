@@ -3,7 +3,6 @@
     {
       pkgs,
       pkgs-unstable,
-      pkgs-old,
       system-arch,
       swap-write-device,
       hostname,
@@ -212,7 +211,6 @@
         pciutils
         ffmpeg
         pkgs-unstable.yazi
-        pkgs-old.neofetch
         self.packages.${system-arch}.update-utils
       ];
 
