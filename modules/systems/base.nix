@@ -10,7 +10,7 @@
     }:
     {
       imports = [
-        self.nixosModules.neovim-config
+        self.nixosModules.nvf-config
       ];
 
       # Bootloader.

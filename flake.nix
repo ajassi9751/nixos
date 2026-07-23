@@ -8,6 +8,10 @@
     # frc-nix.url = "github:frc4451/frc-nix";
     import-tree.url = "github:denful/import-tree";
     flake-parts.url = "github:hercules-ci/flake-parts";
+    nvf = {
+      url = "github:NotAShelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs =
