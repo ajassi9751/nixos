@@ -34,18 +34,12 @@
             vim.opt.background = "dark"
 
             -- Treesitter
-            vim.api.nvim_create_autocmd("FileType", {
-              callback = function()
-                pcall(vim.treesitter.start)
-              end,
-            })
+            vim.treesitter.start()
 
             -- LSP
-            vim.lsp.config('*', {
-              capabilities = require('cmp_nvim_lsp').default_capabilities(),
-            })
+            local lspconfig = require("lspconfig")
 
-            vim.lsp.config('lua_ls', {
+            lspconfig.lua_ls.setup({
               cmd = { "${pkgs-unstable.lua-language-server}/bin/lua-language-server" },
               settings = {
                 Lua = {
@@ -55,33 +49,21 @@
               },
             })
 
-            vim.lsp.config('rust_analyzer', {
+            lspconfig.rust_analyzer.setup({
               cmd = { "${pkgs-unstable.rust-analyzer}/bin/rust-analyzer" },
-              settings = {
-                ['rust-analyzer'] = {
-                  checkOnSave = { command = "clippy" },
-                },
-              },
             })
 
-            vim.lsp.config('clangd', {
+            lspconfig.clangd.setup({
               cmd = { "${pkgs-unstable.clang-tools}/bin/clangd" },
             })
 
-            vim.lsp.config('pyright', {
+            lspconfig.pyright.setup({
               cmd = { "${pkgs-unstable.pyright}/bin/pyright-langserver", "--stdio" },
             })
 
-            vim.lsp.config('nixd', {
-              cmd = { "${pkgs.nixd}/bin/nixd" },
-              settings = {
-                nixd = {
-                  nixpkgs = { expr = "import <nixpkgs> { }" },
-                },
-              },
+            lspconfig.nil_ls.setup({
+              cmd = { "${pkgs.nil}/bin/nil" },
             })
-
-            vim.lsp.enable({'lua_ls', 'rust_analyzer', 'clangd', 'pyright', 'nixd'})
 
             -- Completion
             local cmp = require("cmp")
@@ -121,6 +103,7 @@
           packages.myVimPackage = with pkgs.vimPlugins; {
             start = [
               nvim-treesitter.withAllGrammars
+              nvim-lspconfig
               nvim-cmp
               cmp-nvim-lsp
               cmp-buffer
