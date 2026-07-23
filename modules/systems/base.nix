@@ -211,8 +211,13 @@
         pciutils
         ffmpeg
         pkgs-unstable.yazi
+        pkgs-unstable.nh
         self.packages.${system-arch}.update-utils
       ];
+
+      environment.sessionVariables = {
+        NH_OS_FLAKE = "/home/aikam/nixos"; # Used for nh
+      };
 
       fonts.packages = with pkgs; [
         jetbrains-mono
