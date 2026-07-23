@@ -14,6 +14,7 @@
             # Hopefully doesn't conflict and instead compliments terminal transparency
             transparent = true;
           };
+	  clipboard.enable = true;
           vimAlias = false;
           lsp.enable = true;
           telescope.enable = true;
