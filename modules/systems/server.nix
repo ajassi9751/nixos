@@ -31,7 +31,7 @@
     };
     services.caddy = {
       enable = true;
-      virtualHosts."hs.server.com".extraConfig = ''
+      virtualHosts."hicescale.duckdns.org".extraConfig = ''
         reverse_proxy localhost:8080
       '';
     };
