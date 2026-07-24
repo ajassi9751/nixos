@@ -6,7 +6,7 @@
     
       settings = {
         # The publicly accessible URL where your clients will reach Headscale
-        server_url = "https://hicescale.duckdns.org";
+        server_url = "http://hicescale.duckdns.org:8080";
       
         # The port Headscale listens on internally
         listen_addr = "0.0.0.0:8080";
@@ -43,7 +43,7 @@
     # Open HTTP (80) and HTTPS (443) ports for ACME certificates
     networking = {
       networkmanager.enable = false;
-      firewall.allowedTCPPorts = [ 80 443 ];
+      firewall.allowedTCPPorts = [ 80 443 8080 ];
       firewall.allowedUDPPorts = [ 41641 ]; # Tailscale direct communication port
       # Set DNS servers
       nameservers = [ "1.1.1.1" "9.9.9.9" "8.8.8.8" ];
