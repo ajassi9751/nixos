@@ -3,6 +3,7 @@ let
   system-arch = "x86_64-linux";
   swap-write-device = "/dev/nvme0n1p3";
   hostname = "fwtop";
+  boot-loader-device = "/dev/nvme0n1";
 in
 {
   flake.nixosConfigurations.fwtop = inputs.nixpkgs.lib.nixosSystem {
@@ -14,6 +15,7 @@ in
         system-arch
         swap-write-device
         hostname
+        boot-loader-device
         ;
     };
 
@@ -22,6 +24,7 @@ in
       ./_hardware/fwtop.nix # Update this
       self.nixosModules.base-system
       self.nixosModules.desktop-system
+      self.nixosModules.systemd-boot-system
       ({ pkgs, ... }: {
         # This value determines the NixOS release from which the default
         # settings for stateful data, like file locations and database versions

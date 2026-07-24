@@ -3,6 +3,7 @@ let
   system-arch = "x86_64-linux";
   swap-write-device = "/dev/sda3";
   hostname = "server";
+  boot-loader-device = "/dev/sda";
 in
 {
   flake.nixosConfigurations.server = inputs.nixpkgs.lib.nixosSystem {
@@ -14,6 +15,7 @@ in
         system-arch
         swap-write-device
         hostname
+        boot-loader-device
         ;
     };
 
@@ -22,6 +24,7 @@ in
       ./_hardware/server.nix # Update this
       self.nixosModules.base-system
       self.nixosModules.server-system
+      self.nixosModules.grub-system
       ({ pkgs, ... }: {
         # This value determines the NixOS release from which the default
         # settings for stateful data, like file locations and database versions

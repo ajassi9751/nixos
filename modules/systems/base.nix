@@ -1,4 +1,4 @@
-{ self, inputs, ... }: {
+{ self, ... }: {
   flake.nixosModules.base-system =
     {
       pkgs,
@@ -14,8 +14,6 @@
       ];
 
       # Bootloader.
-      boot.loader.systemd-boot.enable = true;
-      # boot.loader.grub.enable = true;
       boot.loader.efi.canTouchEfiVariables = true;
 
       # Latest kernel

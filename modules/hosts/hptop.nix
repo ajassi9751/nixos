@@ -3,6 +3,7 @@ let
   system-arch = "x86_64-linux";
   swap-write-device = "/dev/sda3";
   hostname = "hptop";
+  boot-loader-device = "/dev/sda";
 in
 {
   flake.nixosConfigurations.hptop = inputs.nixpkgs.lib.nixosSystem {
@@ -14,6 +15,7 @@ in
         system-arch
         swap-write-device
         hostname
+        boot-loader-device
         ;
     };
 
@@ -23,6 +25,7 @@ in
       self.nixosModules.base-system
       self.nixosModules.desktop-system
       self.nixosModules.old-laptop-system
+      self.nixosModules.systemd-boot-system
       ({ pkgs, ... }: {
         # This value determines the NixOS release from which the default
         # settings for stateful data, like file locations and database versions
