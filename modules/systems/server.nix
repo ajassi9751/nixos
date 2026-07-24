@@ -6,7 +6,7 @@
     
       settings = {
         # The publicly accessible URL where your clients will reach Headscale
-        server_url = "http://hicescale.duckdns.org:8080";
+        server_url = "96.244.241.158:8080";
       
         # The port Headscale listens on internally
         listen_addr = "0.0.0.0:8080";
