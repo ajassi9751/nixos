@@ -48,6 +48,9 @@
         #media-session.enable = true;
       };
 
+      # Enable networking
+      networking.networkmanager.enable = true;
+
       # Enable the KDE Desktop Environment and the login manager
       services.displayManager.sddm.enable = true;
       services.desktopManager.plasma6.enable = true;
