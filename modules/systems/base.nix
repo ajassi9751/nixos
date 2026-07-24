@@ -109,18 +109,6 @@
         ];
       };
 
-      users.users.harnoor = {
-        isNormalUser = true;
-        description = "Harnoors account for lab";
-        extraGroups = [
-          "networkmanager"
-          "wheel"
-        ];
-        packages = with pkgs; [
-          #  thunderbird
-        ];
-      };
-
       # Some programs need SUID wrappers, can be configured further or are
       # started in user sessions.
       # programs.mtr.enable = true;
