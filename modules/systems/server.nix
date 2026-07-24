@@ -6,7 +6,7 @@
     
       settings = {
         # The publicly accessible URL where your clients will reach Headscale
-        server_url = "https://hs.server.com";
+        server_url = "https://hicescale.duckdns.org";
       
         # The port Headscale listens on internally
         listen_addr = "0.0.0.0:8080";
@@ -34,6 +34,11 @@
       virtualHosts."hs.server.com".extraConfig = ''
         reverse_proxy localhost:8080
       '';
+    };
+    services.duckdns = {
+      enable = true;
+      domains = [ "hicescale" ];
+      tokenFile = "/var/lib/duckdns/token";
     };
     # Open HTTP (80) and HTTPS (443) ports for ACME certificates
     networking = {
