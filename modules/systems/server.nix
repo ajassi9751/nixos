@@ -43,7 +43,7 @@
     # Open HTTP (80) and HTTPS (443) ports for ACME certificates
     networking = {
       networkmanager.enable = false;
-      firewall.allowedTCPPorts = [ 80 443 8096 ];
+      firewall.allowedTCPPorts = [ 80 443 8096 8920 ];
       firewall.allowedUDPPorts = [ 41641 ]; # Tailscale direct communication port
       # Set DNS servers
       nameservers = [ "1.1.1.1" "9.9.9.9" "8.8.8.8" ];
