@@ -6,7 +6,7 @@
     
       settings = {
         # The publicly accessible URL where your clients will reach Headscale
-        server_url = "http://96.244.241.158:8080";
+        server_url = "https://colrec.ddns.me";
       
         # The port Headscale listens on internally
         listen_addr = "0.0.0.0:8080";
@@ -31,7 +31,7 @@
     };
     services.caddy = {
       enable = true;
-      virtualHosts."hicescale.duckdns.org".extraConfig = ''
+      virtualHosts."colrec.ddns.me".extraConfig = ''
         reverse_proxy localhost:8080
       '';
     };
