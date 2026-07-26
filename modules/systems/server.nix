@@ -35,11 +35,6 @@
         reverse_proxy localhost:8080
       '';
     };
-    services.duckdns = {
-      enable = true;
-      domains = [ "hicescale" ];
-      tokenFile = "/var/lib/duckdns/token";
-    };
     # Open HTTP (80) and HTTPS (443) ports for ACME certificates
     networking = {
       networkmanager.enable = false;
