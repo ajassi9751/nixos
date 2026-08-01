@@ -71,6 +71,7 @@
   };
   # Auto backup
   services.btrbk.instances."photos-backup" = {
+    enable = true;
     onCalendar = "02:00";
     settings = {
       snapshot_retention = "7d 4w";
