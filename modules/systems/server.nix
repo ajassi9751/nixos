@@ -70,22 +70,22 @@
     services.jellyfin.enable = true;
   };
   # Auto backup
-  services.btrbk.instances."photos-backup" = {
-    enable = true;
-    onCalendar = "02:00";
-    settings = {
-      snapshot_retention = "7d 4w";
-      target_retention = "7d 4w 6m";
-
-      volume."/int/prot" = {
-        # Since /int/prot is @photos, .snapshots sits right here: /int/prot/.snapshots
-        snapshot_dir = ".snapshots";
-
-        subvolume."." = {
-          # Since /mnt/backup is @backup, this creates: /mnt/backup/photos_backup
-          target = "/mnt/backup/photos_backup";
-        };
-      };
-    };
-  };
+  # services.btrbk.instances."photos-backup" = {
+  #   enable = true;
+  #   onCalendar = "02:00";
+  #   settings = {
+  #     snapshot_retention = "7d 4w";
+  #     target_retention = "7d 4w 6m";
+  #
+  #     volume."/int/prot" = {
+  #       # Since /int/prot is @photos, .snapshots sits right here: /int/prot/.snapshots
+  #       snapshot_dir = ".snapshots";
+  #
+  #       subvolume."." = {
+  #         # Since /mnt/backup is @backup, this creates: /mnt/backup/photos_backup
+  #         target = "/mnt/backup/photos_backup";
+  #       };
+  #     };
+  #   };
+  # };
 }
