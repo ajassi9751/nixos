@@ -42,8 +42,6 @@
       # Ssd health stuff and helps with power as it gives info to tlp
       services.smartd.enable = true;
 
-      programs.appimage.enable = true;
-
       # Maybe change this
       networking.hostName = hostname; # Define your hostname.
       # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.

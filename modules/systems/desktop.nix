@@ -72,6 +72,8 @@
 
       programs.kdeconnect.enable = true;
 
+      programs.appimage.enable = true;
+
       environment.sessionVariables = {
         STEAM_EXTRA_COMPAT_TOOLS_PATHS = "~/home/.steam/root/compatabilitytools.d"; # Used for protonup
       };
