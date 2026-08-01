@@ -1,9 +1,9 @@
 { self, inputs, ... }:
 let
   system-arch = "x86_64-linux";
-  swap-write-device = "/dev/sda3";
+  swap-write-device = "/dev/disk/by-partuuid/eaf81a1b-239f-48a3-a45d-4fbbf492f28b";
   hostname = "hptop";
-  boot-loader-device = "/dev/sda";
+  boot-loader-device = "/dev/sda"; # Uses a /dev/sdX because it doesn't matter
 in
 {
   flake.nixosConfigurations.hptop = inputs.nixpkgs.lib.nixosSystem {

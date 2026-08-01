@@ -1,9 +1,9 @@
 { self, inputs, ... }:
 let
   system-arch = "x86_64-linux";
-  swap-write-device = "/dev/sda3";
+  swap-write-device = "/dev/disk/by-partuuid/95aed96b-02";
   hostname = "server";
-  boot-loader-device = "/dev/sda";
+  boot-loader-device = "/dev/disk/by-id/ata-SATA_SSD_22081125603168";
 in
 {
   flake.nixosConfigurations.server = inputs.nixpkgs.lib.nixosSystem {
