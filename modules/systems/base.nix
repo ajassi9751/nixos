@@ -193,6 +193,7 @@
         zoxide
         pciutils
         ffmpeg
+        btrfs-progs
         pkgs-unstable.yazi
         pkgs-unstable.nh
         self.packages.${system-arch}.update-utils
