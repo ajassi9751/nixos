@@ -71,14 +71,19 @@
     # Auto backup
     services.btrbk.instances."photos-backup" = {
       onCalendar = "02:00";
+
       settings = {
-        snapshot_retention = "7d 4w";
-        target_retention = "7d 4w 6m";
+        snapshot_preserve_min = "7d";
+        snapshot_preserve = "4w";
+
+        target_preserve_min = "7d";
+        target_preserve = "4w 6m";
+
         volume."/int/prot" = {
           snapshot_dir = ".snapshots";
 
           subvolume."." = {
-            target = "/mnt/backup/prot_backup";
+            target = "/mnt/backup/photos_backup";
           };
         };
       };
