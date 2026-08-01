@@ -18,6 +18,7 @@
     "ehci_pci"
     "ahci"
     "usb_storage"
+    "usbhid"
     "sd_mod"
   ];
   boot.initrd.kernelModules = [ ];
@@ -45,7 +46,7 @@
     device = "/dev/disk/by-uuid/da524f3f-f5f6-42d5-8ef2-a6e2b4653eee";
     fsType = "btrfs";
     options = [
-      "subvol=@photos"
+      "subvol=@prot"
       "noatime"
       "compress=zstd:1"
       "autodefrag"
@@ -64,6 +65,7 @@
       "space_cache=v2"
     ];
   };
+
   swapDevices = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
