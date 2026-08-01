@@ -69,7 +69,7 @@
     # };
     services.jellyfin.enable = true;
     # Auto backup
-    services.btrbk.instances."photos-backup" = {
+    services.btrbk.instances."prot-backup" = {
       onCalendar = "02:00";
 
       settings = {
@@ -83,7 +83,7 @@
           snapshot_dir = ".snapshots";
 
           subvolume."." = {
-            target = "/mnt/backup/photos_backup";
+            target = "/mnt/backup/prot_backup";
           };
         };
       };
