@@ -1,7 +1,7 @@
 { ... }: {
   flake.nixosModules.server-system = { pkgs, ... }:
   let
-    uploadServicePkg = pkgs.callPackage /home/aikam/upload-service {};
+    uploadServicePkg = pkgs.callPackage ./upload-service {};
   in
   {
     services.headscale = {
