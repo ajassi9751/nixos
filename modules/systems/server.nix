@@ -1,5 +1,9 @@
 { ... }: {
-  flake.nixosModules.server-system = { pkgs, ... }: {
+  flake.nixosModules.server-system = { pkgs, ... }:
+  let
+    uploadServicePkg = pkgs.callPackage /home/aikam/upload-service {};
+  in
+  {
     services.headscale = {
       enable = true;
       port = 8080;
@@ -43,6 +47,7 @@
         443
         8096
         8920
+        8020
       ];
       firewall.allowedUDPPorts = [ 41641 ]; # Tailscale direct communication port
       # Set DNS servers
@@ -86,6 +91,25 @@
             target = "/mnt/backup/prot_backup";
           };
         };
+      };
+    };
+    systemd.services.upload-service = {
+      description = "Upload service";
+      after = [ "network.target" ];
+      wantedBy = [ "multi-user.target" ];
+
+      serviceConfig = {
+        Type = "simple";
+        User = "aikam";
+        Group = "users";
+
+        ExecStart = "${uploadServicePkg}/bin/upload-service /int/prot/jellyfin/family-media";
+
+        WorkingDirectory = "/home/aikam/upload-service";
+
+        # Hardening properties
+        Restart = "on-failure";
+        PrivateTmp = true;
       };
     };
   };
