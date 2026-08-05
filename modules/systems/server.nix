@@ -105,7 +105,7 @@
 
         ExecStart = "${uploadServicePkg}/bin/upload-service /int/prot/jellyfin/family-media";
 
-        WorkingDirectory = "/home/aikam/upload-service";
+        WorkingDirectory = "/etc/nixos/upload-service";
 
         # Hardening properties
         Restart = "on-failure";
