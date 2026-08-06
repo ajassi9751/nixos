@@ -102,7 +102,7 @@
 
         ExecStart = "${self.packages.upload-service}/bin/upload-service /int/prot/jellyfin/family-media";
 
-        WorkingDirectory = "/etc/nixos/upload-service";
+        WorkingDirectory = "/etc/nixos/modules/packages/upload-service";
 
         # Hardening properties
         Restart = "on-failure";
