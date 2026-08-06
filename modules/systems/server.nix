@@ -1,6 +1,6 @@
-{ ... }: {
+{ self, ... }: {
   flake.nixosModules.server-system =
-    { pkgs, ... }:
+    { pkgs, system-arch, ... }:
     {
       services.headscale = {
         enable = true;
@@ -101,7 +101,9 @@
           User = "aikam";
           Group = "users";
 
-          ExecStart = "${self.packages.upload-service}/bin/upload-service /int/prot/jellyfin/family-media";
+          ExecStart = "${
+            self.packages.${system-arch}.upload-service
+          }/bin/upload-service /int/prot/jellyfin/family-media";
 
           WorkingDirectory = "/etc/nixos/modules/packages/upload-service";
 
