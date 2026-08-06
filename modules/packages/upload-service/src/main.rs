@@ -13,7 +13,7 @@ use tokio::io::AsyncWriteExt;
 async fn main() {
     let app = Router::new().route("/", get(serve_index)).route(
         "/upload",
-        post(handle_upload).layer(DefaultBodyLimit::max(500 * 1024 * 1024)),
+        post(handle_upload).layer(DefaultBodyLimit::disable()),
     );
 
     let addr = SocketAddr::from(([0, 0, 0, 0], 8020));
