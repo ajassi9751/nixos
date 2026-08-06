@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Server Upload</title>
+</head>
+<body style="font-family: sans-serif; text-align: center; margin-top: 50px;">
+    <h1>Home Media Server</h1>
+    
+    <div id="error-banner" style="color: red; background-color: #ffe6e6; padding: 10px; margin: 0 auto 20px auto; width: 300px; border: 1px solid red; display: none;"></div>
+    
+    <div id="success-banner" style="color: green; background-color: #e6ffe6; padding: 10px; margin: 0 auto 20px auto; width: 300px; border: 1px solid green; display: none;">Upload successful!</div>
+
+    <form id="upload-form">
+        <label for="folder">Choose Destination Folder:</label><br>
+        <select name="folder" id="folder" style="padding: 8px; margin: 10px 0; width: 200px;">
+            <option value="" disabled selected>-- Select a folder --</option>
+            {{FOLDER_OPTIONS}}
+        </select><br><br>
+
+        <label for="new_folder">Or Create New Folder:</label><br>
+        <input type="text" id="new_folder" name="new_folder" placeholder="e.g. vacation_2026" style="padding: 8px; margin: 10px 0;"><br><br>
+
+        <input type="file" id="media" name="media" accept="image/*,video/*" multiple required><br><br>
+        
+        <button type="submit" style="padding: 10px 20px;">Upload Files</button>
+    </form>
+
+    <script>
+        const form = document.getElementById('upload-form');
+        const errorBanner = document.getElementById('error-banner');
+        const successBanner = document.getElementById('success-banner');
+
+        form.addEventListener('submit', async (e) => {
+            // Prevent the default browser form reload
+            e.preventDefault();
+
+            // Hide previous messages
+            errorBanner.style.display = 'none';
+            successBanner.style.display = 'none';
+
+            const folderSelect = document.getElementById('folder').value;
+            const newFolderInput = document.getElementById('new_folder').value.trim();
+
+            // Frontend validation: Ensure a folder is selected or created
+            if (!folderSelect && !newFolderInput) {
+                errorBanner.innerText = "Error: You must select or create a destination folder!";
+                errorBanner.style.display = 'block';
+                return;
+            }
+
+            // Pack up form elements into a FormData object
+            const formData = new FormData(form);
+
+            try {
+                // Send data asynchronously via fetch
+                const response = await fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    successBanner.style.display = 'block';
+                    form.reset();
+                    // Optional: Refresh the page after a brief moment to update folder list dropdown
+                    setTimeout(() => window.location.reload(), 1500);
+                } else {
+                    const errorText = await response.text();
+                    errorBanner.innerText = "Error: " + errorText;
+                    errorBanner.style.display = 'block';
+                }
+            } catch (err) {
+                errorBanner.innerText = "Network error: Failed to connect to server.";
+                errorBanner.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
