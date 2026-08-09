@@ -46,6 +46,7 @@
           8096
           8920
           8020
+          8040
         ];
         firewall.allowedUDPPorts = [ 41641 ]; # Tailscale direct communication port
         # Set DNS servers
