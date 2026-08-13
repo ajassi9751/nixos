@@ -82,12 +82,7 @@
         rofi
         quickshell
         cava
-        hypridle
-        hyprlock
-        # stylua
         # popsicle
-        # cmake
-        # ghostty # Make this unstable
         # localsend
         brave
         # chromium
@@ -95,7 +90,6 @@
         brightnessctl
         pavucontrol
         qemu
-        # gdb
         mangohud
         protonup-ng
         ckan
@@ -103,10 +97,17 @@
         # heroic # Also will use if needed
         # bottles # Same as the other two
         vlc
-        # zig
         prismlauncher
         obs-studio
+        # Hypr stuff
+        hypridle
+        hyprlock
+        hyprsunset
         # Dev tools
+        # cmake
+        # stylua
+        # zig
+        # gdb
         pkgs-unstable.clang-tools
         pkgs-unstable.rust-analyzer
         pkgs-unstable.rustfmt
