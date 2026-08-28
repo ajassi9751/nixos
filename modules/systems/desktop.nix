@@ -59,8 +59,8 @@
       programs.hyprland = {
         enable = true;
         xwayland.enable = true;
-        package = inputs.nixpkgs-unstable.legacyPackages.${system-arch}.hyprland;
-        portalPackage = inputs.nixpkgs-unstable.legacyPackages.${system-arch}.xdg-desktop-portal-hyprland;
+        package = pkgs-unstable.hyprland;
+        portalPackage = pkgs-unstable.xdg-desktop-portal-hyprland;
       };
 
       programs.steam = {
