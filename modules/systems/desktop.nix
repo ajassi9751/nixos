@@ -97,6 +97,7 @@
         # heroic # Also will use if needed
         # bottles # Same as the other two
         vlc
+        mpv
         prismlauncher
         obs-studio
         # Hypr stuff

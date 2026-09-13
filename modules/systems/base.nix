@@ -183,15 +183,13 @@
         fzf
         # fish
         # tmux
-        gnumake
         p7zip
-        zip
-        unzip
         # Maybe remove zoxide
         zoxide
         pciutils
         ffmpeg
         btrfs-progs
+        pkgs-unstable.gnumake
         pkgs-unstable.yazi
         pkgs-unstable.nh
         self.packages.${system-arch}.update-utils
