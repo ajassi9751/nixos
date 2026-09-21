@@ -160,6 +160,16 @@
         };
       };
 
+      programs.zsh = {
+        enable = true;
+        enableCompletion = true;
+        enableBashCompletion = true;
+        autosuggestions.enable = true;
+        interactiveShellInit = ''
+eval "$(zoxide init zsh)"
+        '';
+      };
+
       services.tailscale.enable = true;
 
       # Maybe use pkgs for this
@@ -174,7 +184,6 @@
         curl
         # wget
         fastfetch
-        zsh
         gh
         cowsay
         btop
@@ -184,7 +193,6 @@
         # fish
         # tmux
         p7zip
-        # Maybe remove zoxide
         zoxide
         pciutils
         ffmpeg
