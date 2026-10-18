@@ -22,16 +22,6 @@
       # Forcefully clear the hardware-generated swap devices
       swapDevices = pkgs.lib.mkForce [ ];
 
-      # May not be the best for servers but I care about ssd life
-      # Configure zram
-      zramSwap = {
-        enable = true;
-        priority = 100; # Not relevant but gives it higher priority than regular swap
-        algorithm = "lz4"; # lz4 algorithm is lighter but compresses less than zstd
-        memoryPercent = 50; # Can use up to 50% of memory to compress
-        writebackDevice = swap-write-device; # Uses this partition in case there is too much data
-      };
-
       # I also don't know if this is good for servers
       # Userspace oom killer which helps with zram
       systemd.oomd.enable = true;

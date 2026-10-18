@@ -4,10 +4,20 @@
       pkgs,
       pkgs-unstable,
       system-arch,
+      swap-write-device,
       ...
     }:
     {
       # boot.kernelModules = [ "bfq" ]; # Load bfq kernel module
+
+      # Configure zram
+      zramSwap = {
+        enable = true;
+        priority = 100; # Not relevant but gives it higher priority than regular swap
+        algorithm = "lz4"; # lz4 algorithm is lighter but compresses less than zstd
+        memoryPercent = 50; # Can use up to 50% of memory to compress
+        writebackDevice = swap-write-device; # Uses this partition in case there is too much data
+      };
 
       boot.kernel.sysctl = {
         "vm.swappiness" = 10; # Keep program memory out of swap and prefer it over filesystem cache (better for pc's). default: 60
