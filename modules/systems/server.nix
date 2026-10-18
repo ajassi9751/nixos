@@ -7,14 +7,25 @@
       # boot.kernelModules = [ "bfq" ];
 
       services.udev.extraRules = ''
+        # IO Scheduler config
+
         # HDDs use bfq for fairness and low latency
         ACTION=="add|change", KERNEL=="sd*[!0-9]", ATTR{queue/rotational}=="1", ATTR{queue/scheduler}="bfq"
 
-	# Sata SSDs use mq-deadline becuase they aren't smart enough for none and need a lighweight scheduler
+        # Sata SSDs use mq-deadline becuase they aren't smart enough for none and need a lighweight scheduler
         ACTION=="add|change", KERNEL=="sd*[!0-9]", ATTR{queue/rotational}=="0", ATTR{queue/scheduler}="mq-deadline"
 
         # NVMe SSDs use none because they are smart and fast
         ACTION=="add|change", KERNEL=="nvme*", ATTR{queue/scheduler}="none"
+
+        # Readahead config
+
+        # Set read-ahead to 4096 sectors (2MB) for rotational drives (HDDs)
+        ACTION=="add|change", KERNEL=="sd*[!0-9]", ATTR{queue/rotational}=="1", ATTR{queue/read_ahead_kb}="2048"
+
+        # Keep a smaller read-ahead (or default) for non-rotational drives (SSDs/NVMe)
+        ACTION=="add|change", KERNEL=="sd*[!0-9]|nvme*", ATTR{queue/rotational}=="0", ATTR{queue/read_ahead_kb}="512"
+
       '';
 
       # Configure zram
@@ -50,15 +61,6 @@
         "net.ipv4.tcp_rmem" = "4096 87380 16777216";
         "net.ipv4.tcp_wmem" = "4096 65536 16777216";
       };
-
-      # Readahead config
-      services.udev.extraRules = ''
-        # Set read-ahead to 4096 sectors (2MB) for rotational drives (HDDs)
-        ACTION=="add|change", KERNEL=="sd*[!0-9]", ATTR{queue/rotational}=="1", ATTR{queue/read_ahead_kb}="2048"
-
-        # Keep a smaller read-ahead (or default) for non-rotational drives (SSDs/NVMe)
-        ACTION=="add|change", KERNEL=="sd*[!0-9]|nvme*", ATTR{queue/rotational}=="0", ATTR{queue/read_ahead_kb}="512"
-      '';
 
       services.headscale = {
         enable = true;
