@@ -94,7 +94,7 @@
         cava
         # popsicle
         # localsend
-        brave
+        # brave # unmaintainted
         # chromium
         playerctl
         brightnessctl
